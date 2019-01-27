@@ -1,3 +1,7 @@
+class Evaluator(object):
+    pass
+
+
 def evaluate(arg_list):
     ans = 0
     if arg_list[0] == '+':
