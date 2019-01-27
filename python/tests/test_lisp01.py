@@ -1,6 +1,16 @@
 from unittest import TestCase
-import lisp.lisp01
+from lisp import lisp01
 
-class Sample(TestCase):
-    def test_true(self):
-        self.assertTrue(True)
+
+class TestLisp01(TestCase):
+    def test_evaluator01(self):
+        eval_args = ['+', 1]
+        self.assertEqual(lisp01.evaluate(eval_args), 1)
+
+    def test_evaluator02(self):
+        eval_args = ['+', 1, 2]
+        self.assertEqual(lisp01.evaluate(eval_args), 1+2)
+
+    def test_evaluator03(self):
+        eval_args = ['+', 1, 2, 3]
+        self.assertEqual(lisp01.evaluate(eval_args), 1+2+3)
