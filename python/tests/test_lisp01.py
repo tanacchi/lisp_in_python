@@ -1,4 +1,4 @@
-import unittest import TestCase
+from unittest import TestCase
 import lisp.lisp01
 
 class Sample(TestCase):
