@@ -3,6 +3,9 @@ from lisp import lisp01
 
 
 class TestLisp01(TestCase):
+    def setUp(self):
+        self.evaluator = lisp01.Evaluator()
+
     def test_plus_evaluator01(self):
         eval_args = ['+', 1]
         self.assertEqual(lisp01.evaluate(eval_args), 1)
