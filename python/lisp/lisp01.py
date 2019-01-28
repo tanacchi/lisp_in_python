@@ -5,11 +5,8 @@ class Evaluator(object):
 def evaluate(arg_list):
     ans = 0
     if arg_list[0] == '+':
-        for elem in arg_list[1:]:
-            ans += elem
-        return ans
+        add = lambda args: sum(args)
+        return add(arg_list[1:])
     if arg_list[0] == '-':
-        ans += arg_list[1]
-        for elem in arg_list[2:]:
-            ans -= elem
-        return ans
+        minus = lambda args: args[0] - sum(args[1:])
+        return minus(arg_list[1:])
