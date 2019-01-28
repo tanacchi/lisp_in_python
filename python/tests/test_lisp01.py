@@ -26,3 +26,11 @@ class TestLisp01(TestCase):
         eval_args = ['-', 5, 3, 3]
         self.assertEqual(lisp01.evaluate(eval_args), 5-3-3)
 
+    def test_multi_evaluator01(self):
+        eval_args = ['*', 2, 3]
+        self.assertEqual(lisp01.evaluate(eval_args), 2*3)
+
+    def test_multi_evaluator02(self):
+        eval_args = ['*', 5, 3, 4]
+        self.assertEqual(lisp01.evaluate(eval_args), 5*3*4)
+
