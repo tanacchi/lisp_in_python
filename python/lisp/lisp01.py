@@ -3,10 +3,8 @@ class Evaluator(object):
 
 
 def evaluate(arg_list):
-    ans = 0
-    if arg_list[0] == '+':
-        add = lambda args: sum(args)
-        return add(arg_list[1:])
-    if arg_list[0] == '-':
-        minus = lambda args: args[0] - sum(args[1:])
-        return minus(arg_list[1:])
+    dispatch_table = {
+        '+': lambda args: sum(args),
+        '-': lambda args: args[0] - sum(args[1:])
+    }
+    return dispatch_table.get(arg_list[0])(arg_list[1:])
