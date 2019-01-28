@@ -2,10 +2,16 @@ class Evaluator(object):
     pass
 
 def add(args):
-    return sum(args)
+    ans = args[0]
+    for elem in args[1:]:
+        ans += elem
+    return ans
 
 def minus(args):
-    return args[0] - sum(args[1:])
+    ans = args[0]
+    for elem in args[1:]:
+        ans -= elem
+    return ans
 
 def multi(args):
     ans = args[0]
