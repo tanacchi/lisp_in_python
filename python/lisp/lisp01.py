@@ -1,10 +1,22 @@
 class Evaluator(object):
     pass
 
+def add(args):
+    return sum(args)
+
+def minus(args):
+    return args[0] - sum(args[1:])
+
+def multi(args):
+    ans = args[0]
+    for elem in args[1:]:
+        ans *= elem
+    return ans
 
 def evaluate(arg_list):
     dispatch_table = {
-        '+': lambda args: sum(args),
-        '-': lambda args: args[0] - sum(args[1:])
+        '+': add,
+        '-': minus,
+        '*': multi 
     }
     return dispatch_table.get(arg_list[0])(arg_list[1:])
