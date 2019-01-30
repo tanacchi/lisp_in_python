@@ -23,7 +23,7 @@ class LinkedList(object):
             ret += str(target.head) + " "
             target = target.tail
         else:
-             ret += str(target) + " )"
+            ret += str(target) + " )"
         return ret
 
 
