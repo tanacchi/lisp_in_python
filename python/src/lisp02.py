@@ -20,7 +20,7 @@ class LinkedList(object):
         ret = "( "
         target = self.cell
         while type(target) is Cell:
-            ret += str(target.head) + " "
+            ret += str(target.head) + " . "
             target = target.tail
         else:
             ret += str(target) + " )"
