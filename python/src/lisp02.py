@@ -8,13 +8,15 @@ class Cell(object):
                 #  self.head, id(self.head),
                 #  self.tail, id(self.tail))
 
+def cons(car, cdr):
+    return Cell(car, cdr)
 
 class LinkedList(object):
     def __init__(self, arg_list):
         arg_list.reverse()
         self.cell = arg_list[0]
         for elem in arg_list[1:]:
-            self.cell = Cell(elem, self.cell)
+            self.cell = cons(elem, self.cell)
 
     def __str__(self):
         ret = "( "
