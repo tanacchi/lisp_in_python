@@ -17,3 +17,7 @@ class TestLisp01(TestCase):
     def test_nested_list_reader(self):
         result = self.reader.read("( ABC (DEF GHI) JKL )")
         self.assertEqual(result, ["ABC", ["DEF", "GHI"], "JKL"])
+
+    def test_empty_list_reader(self):
+        result = self.reader.read("( ())")
+        self.assertEqual(result, [[]])
