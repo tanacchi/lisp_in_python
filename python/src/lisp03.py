@@ -1,31 +1,30 @@
 import re
 
 class Reader(object):
-    def __init__(self):
-        self.__data = []
-
-    def read(self, src):
-        index, end = 0, len(src)
-        while index < end:
+    def __make_list(self, src, index):
+        result = []
+        while src[index:]:
             match = re.search(re.compile(r'^[\w\d]+'), src[index:])
             if match != None:
                 detected_word = match.group(0)
-                self.__data.append(detected_word)
+                result.append(detected_word)
                 index += len(detected_word)
-
-            ch = src[index]
-            if ch == " ":
+            elif src[index] == "(":
+                sub_result = self.__make_list(src, index + 1)
+                result.append(sub_result['list'])
+                index = sub_result['index']
+            elif src[index] == ")":
+                break
+            else:
                 index += 1
-            elif ch == "(":
-                index += 1
-            elif ch == ")":
-                index += 1
+        return {'list': result, 'index': index + 1}
 
-        return self.__data
-
+    def read(self, src):
+        result = self.__make_list(src, src.find("(") + 1)
+        return result['list']
 
 if __name__ == '__main__':
-    source_str = "( Hello World)"
+    source_str = "( A B (C D ) E)"
     reader = Reader()
     result = reader.read(source_str)
     print(result)
