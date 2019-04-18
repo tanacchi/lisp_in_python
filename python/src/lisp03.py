@@ -6,9 +6,9 @@ class Reader(object):
         while src[index:]:
             match = re.search(re.compile(r'^[\w\d]+'), src[index:])
             if match != None:
-                detected_word = match.group(0)
-                result.append(detected_word)
-                index += len(detected_word)
+                detected_token = match.group(0)
+                result.append(detected_token)
+                index += len(detected_token) + 1
             elif src[index] == "(":
                 sub_result = self.__make_list(src, index + 1)
                 result.append(sub_result['list'])
@@ -27,4 +27,4 @@ if __name__ == '__main__':
     source_str = "( A B (C D ) E)"
     reader = Reader()
     result = reader.read(source_str)
-    print(result)
+    print(result)  # ['A', 'B', ['C', 'D'], 'E']
