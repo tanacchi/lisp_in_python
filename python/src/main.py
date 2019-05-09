@@ -1,6 +1,13 @@
 from reader import Reader
 
-dispatch_table = { 'add': lambda a, b : int(a) + int(b) }
+dispatch_table = {}
+def define(key, value):
+    dispatch_table[key] = lambda a, b : value
+
+dispatch_table.update({ 
+    'add': lambda a, b : int(a) + int(b),
+    'define' : define
+})
 
 def eval(operand, a, b):
     return dispatch_table[operand](a, b)
