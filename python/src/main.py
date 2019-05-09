@@ -1,16 +1,17 @@
 from reader import Reader
 
 dispatch_table = {}
-def define(key, value):
-    dispatch_table[key] = lambda a, b : value
+def define(args):
+    key, value = args[0], args[1]
+    dispatch_table[key] = lambda args : value
 
 dispatch_table.update({ 
-    'add': lambda a, b : int(a) + int(b),
+    'add': lambda args : int(args[0]) + int(args[1]),
     'define' : define
 })
 
-def eval(operand, a, b):
-    return dispatch_table[operand](a, b)
+def eval(operand, args):
+    return dispatch_table[operand](args)
 
 
 def main():
@@ -20,9 +21,8 @@ def main():
         print(source_list)
 
         operand = source_list[0]
-        a = source_list[1]
-        b = source_list[2]
-        result = eval(operand, a, b)
+        args = source_list[1:]
+        result = eval(operand, args)
         print("result: {}\n".format(result))
 
 
