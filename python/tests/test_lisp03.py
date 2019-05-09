@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src import lisp03
+from snippets import lisp03
 
 
 class TestLisp01(TestCase):
