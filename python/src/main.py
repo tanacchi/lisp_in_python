@@ -2,7 +2,7 @@ from reader import Reader
 
 dispatch_table = {}
 dispatch_table.update({ 
-    'add': lambda args : int(args[0]) + int(args[1]),
+    'add': lambda args : args[0] + args[1],
 })
 
 
