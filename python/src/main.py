@@ -14,6 +14,8 @@ def eval(source):
     elif source[0] == 'define':
         (key, value) = source[1:]
         dispatch_table[key] = value
+    elif source[0] == 'quote':
+        return source[1]
     else:
         operator = dispatch_table[source[0]]
         args = [eval(expr) for expr in source[1:]]
