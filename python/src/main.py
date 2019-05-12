@@ -10,7 +10,8 @@ def eval(operand, args):
         (key, value) = args
         dispatch_table[key] = value
     else:
-        return dispatch_table[operand](args)
+        target = dispatch_table[operand]
+        return target(args) if callable(target) else target
 
 
 def main():
