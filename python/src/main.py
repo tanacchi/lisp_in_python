@@ -7,12 +7,16 @@ dispatch_table.update({
 
 
 def eval(source):
-    if source[0] == 'define':
+    if isinstance(source, str):
+        return dispatch_table[source]
+    elif not isinstance(source, list):
+        return source
+    elif source[0] == 'define':
         (key, value) = source[1:]
         dispatch_table[key] = value
     else:
         target = dispatch_table[source[0]]
-        return target(source[1:]) if callable(target) else target
+        return target(source[1:]) if callable(target) else eval(target)
 
 
 def main():
