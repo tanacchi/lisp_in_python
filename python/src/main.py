@@ -1,17 +1,16 @@
 from reader import Reader
 
 dispatch_table = {}
-def define(args):
-    key, value = args[0], args[1]
-    dispatch_table[key] = lambda args : value
-
 dispatch_table.update({ 
     'add': lambda args : int(args[0]) + int(args[1]),
-    'define' : define
 })
 
 def eval(operand, args):
-    return dispatch_table[operand](args)
+    if operand == 'define':
+        (key, value) = args
+        dispatch_table[key] = value
+    else:
+        return dispatch_table[operand](args)
 
 
 def main():
