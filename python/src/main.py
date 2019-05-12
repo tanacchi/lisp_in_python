@@ -5,6 +5,7 @@ dispatch_table.update({
     'add': lambda args : int(args[0]) + int(args[1]),
 })
 
+
 def eval(source):
     if source[0] == 'define':
         (key, value) = source[1:]
