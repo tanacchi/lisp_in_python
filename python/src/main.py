@@ -5,13 +5,13 @@ dispatch_table.update({
     'add': lambda args : int(args[0]) + int(args[1]),
 })
 
-def eval(operand, args):
-    if operand == 'define':
-        (key, value) = args
+def eval(source):
+    if source[0] == 'define':
+        (key, value) = source[1:]
         dispatch_table[key] = value
     else:
-        target = dispatch_table[operand]
-        return target(args) if callable(target) else target
+        target = dispatch_table[source[0]]
+        return target(source[1:]) if callable(target) else target
 
 
 def main():
@@ -20,9 +20,7 @@ def main():
         source_list = Reader.read(source_str)
         print(source_list)
 
-        operand = source_list[0]
-        args = source_list[1:]
-        result = eval(operand, args)
+        result = eval(source_list)
         print("result: {}\n".format(result))
 
 
