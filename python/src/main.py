@@ -15,8 +15,9 @@ def eval(source):
         (key, value) = source[1:]
         dispatch_table[key] = value
     else:
-        target = dispatch_table[source[0]]
-        return target(source[1:]) if callable(target) else eval(target)
+        operator = dispatch_table[source[0]]
+        args = [eval(expr) for expr in source[1:]]
+        return operator(args) if callable(operator) else eval(operator)
 
 
 def main():
