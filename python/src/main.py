@@ -26,6 +26,8 @@ def evaluate(source):
         return evaluate(evaluate(source[1])[0])
     elif source[0] == 'cdr':
         return evaluate(source[1])[1:]
+    elif source[0] == 'isnull':
+        return evaluate(source[1]) == []
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
