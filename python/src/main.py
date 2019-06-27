@@ -18,10 +18,14 @@ def evaluate(source):
         return source[1]
     elif source[0] == 'cons':
         new = evaluate(source[1])
-        lst = source[2:][0]
+        lst = [evaluate(expr) for expr in source[2:]][0]
         #  lst = evaluate(source[2:])
         lst.insert(0, new)
         return lst
+    elif source[0] == 'car':
+        return evaluate(evaluate(source[1])[0])
+    elif source[0] == 'cdr':
+        return evaluate(source[1])[1:]
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
