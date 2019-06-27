@@ -16,6 +16,12 @@ def evaluate(source):
         dispatch_table[key] = value
     elif source[0] == 'quote':
         return source[1]
+    elif source[0] == 'cons':
+        new = evaluate(source[1])
+        lst = source[2:][0]
+        #  lst = evaluate(source[2:])
+        lst.insert(0, new)
+        return lst
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
@@ -29,6 +35,7 @@ def main():
         print(source_list)
 
         try:
+            result = evaluate(source_list)
             print("result: {}\n".format(result))
         except Exception as e:
             print("ERR: ")
