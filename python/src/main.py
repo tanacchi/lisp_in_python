@@ -6,20 +6,20 @@ dispatch_table.update({
 })
 
 
-def eval(source):
+def evaluate(source):
     if isinstance(source, str):
         return dispatch_table[source]
     elif not isinstance(source, list):
         return source
     elif source[0] == 'define':
-        key, value = source[1], eval(source[2])
+        key, value = source[1], evaluate(source[2])
         dispatch_table[key] = value
     elif source[0] == 'quote':
         return source[1]
     else:
         operator = dispatch_table[source[0]]
-        args = [eval(expr) for expr in source[1:]]
-        return operator(args) if callable(operator) else eval(operator)
+        args = [evaluate(expr) for expr in source[1:]]
+        return operator(args) if callable(operator) else evaluate(operator)
 
 
 def main():
@@ -29,7 +29,6 @@ def main():
         print(source_list)
 
         try:
-            result = eval(source_list)
             print("result: {}\n".format(result))
         except Exception as e:
             print("ERR: ")
