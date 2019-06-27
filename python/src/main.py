@@ -12,7 +12,7 @@ def eval(source):
     elif not isinstance(source, list):
         return source
     elif source[0] == 'define':
-        (key, value) = source[1:]
+        key, value = source[1], eval(source[2])
         dispatch_table[key] = value
     elif source[0] == 'quote':
         return source[1]
