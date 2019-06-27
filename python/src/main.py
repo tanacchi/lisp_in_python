@@ -28,8 +28,12 @@ def main():
         source_list = Reader.read(source_str)
         print(source_list)
 
-        result = eval(source_list)
-        print("result: {}\n".format(result))
+        try:
+            result = eval(source_list)
+            print("result: {}\n".format(result))
+        except Exception as e:
+            print("ERR: ")
+            print(e)
 
 
 if __name__ == '__main__':
