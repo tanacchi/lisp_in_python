@@ -28,6 +28,13 @@ def evaluate(source):
         return evaluate(source[1])[1:]
     elif source[0] == 'isnull':
         return evaluate(source[1]) == []
+    elif source[0] == 'cond':
+        for statement in source[1:]:
+            print("statement: {}".format(statement))
+            cond, expr = statement[0], statement[1]
+            if cond == "else" or evaluate(cond):
+                return evaluate(expr)
+        raise SyntaxError( "Invalid syntax of 'cond'")
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
