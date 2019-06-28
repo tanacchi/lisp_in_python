@@ -5,7 +5,6 @@ dispatch_table.update({
     'add': lambda args : args[0] + args[1],
 })
 
-
 def evaluate(source):
     if isinstance(source, str):
         return dispatch_table[source]
@@ -35,6 +34,16 @@ def evaluate(source):
             if cond == "else" or evaluate(cond):
                 return evaluate(expr)
         raise SyntaxError( "Invalid syntax of 'cond'")
+    elif source[0] == 'lambda':
+        def gen_body_of_lamda(expr, vargs, args):
+            for varg, arg in zip(vargs, args):
+                dispatch_table[varg] = arg
+            result = evaluate(expr)
+            print(result)
+            return result
+
+        vargs, expr = source[1], source[2]
+        return lambda *args: gen_body_of_lamda(expr, vargs, args)
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
