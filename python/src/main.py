@@ -36,6 +36,7 @@ def evaluate(source):
         raise SyntaxError( "Invalid syntax of 'cond'")
     elif source[0] == 'lambda':
         def gen_body_of_lamda(expr, vargs, args):
+            print("varg: {}, arg: {}".format(vargs, args))
             for varg, arg in zip(vargs, args):
                 dispatch_table[varg] = arg
             result = evaluate(expr)
@@ -43,7 +44,7 @@ def evaluate(source):
             return result
 
         vargs, expr = source[1], source[2]
-        return lambda *args: gen_body_of_lamda(expr, vargs, args)
+        return lambda args: gen_body_of_lamda(expr, vargs, args)
     elif source[0] == 'is_zero':
         return evaluate(source[1]) == 0
     else:
