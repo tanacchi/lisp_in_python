@@ -25,7 +25,7 @@ def evaluate(source):
         return evaluate(evaluate(source[1])[0])
     elif source[0] == 'cdr':
         return evaluate(source[1])[1:]
-    elif source[0] == 'isnull':
+    elif source[0] == 'is_null':
         return evaluate(source[1]) == []
     elif source[0] == 'cond':
         for statement in source[1:]:
@@ -44,6 +44,8 @@ def evaluate(source):
 
         vargs, expr = source[1], source[2]
         return lambda *args: gen_body_of_lamda(expr, vargs, args)
+    elif source[0] == 'is_zero':
+        return evaluate(source[1]) == 0
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
