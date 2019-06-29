@@ -48,6 +48,11 @@ def evaluate(source):
         return lambda args: gen_body_of_lamda(expr, vargs, args)
     elif source[0] == 'is_zero':
         return evaluate(source[1]) == 0
+    elif source[0] == 'load':
+        file_path= source[1]
+        with open(file_path) as f:
+            module_content = f.read()
+            return evaluate(Reader.read(module_content))
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
