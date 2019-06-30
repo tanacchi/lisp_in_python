@@ -27,11 +27,15 @@ class Reader(object):  # TODO: Get more accuracy
         return {'list': result, 'index': index + 1}
 
     @staticmethod
-    def read(src):
+    def parse(src):
         result = Reader.__make_list(src, src.find("(") + 1)
         return result['list']
 
-if __name__ == '__main__':
-    source_str = "( A B (C D ) E (FG H) I)"
-    result = Reader.read(source_str)
-    print(result)  # ['A', 'B', ['C', 'D'], 'E', ['FG', 'H', 'I'], 'J']
+    @staticmethod
+    def read():
+        source_str = ""
+        while True:
+            source_str += input("> ") + " "
+            if source_str.count("(") == source_str.count(")"):
+                break
+        return Reader.parse(source_str)

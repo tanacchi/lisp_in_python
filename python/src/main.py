@@ -52,7 +52,7 @@ def evaluate(source):
         file_path= source[1]
         with open(file_path) as f:
             module_content = f.read()
-            return evaluate(Reader.read(module_content))
+            return evaluate(Reader.parse(module_content))
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
@@ -61,8 +61,7 @@ def evaluate(source):
 
 def main():
     while True:
-        source_str  = input("> ")
-        source_list = Reader.read(source_str)
+        source_list = Reader.read()
         print(source_list)
 
         try:
