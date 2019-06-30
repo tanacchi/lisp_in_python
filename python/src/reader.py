@@ -36,6 +36,9 @@ class Reader(object):  # TODO: Get more accuracy
         source_str = ""
         while True:
             source_str += input("> ") + " "
-            if source_str.count("(") == source_str.count(")"):
+            depth = source_str.count("(") - source_str.count(")")
+            if depth > 0:
+                print(">>" * depth, end="")
+            else:
                 break
         return Reader.parse(source_str)

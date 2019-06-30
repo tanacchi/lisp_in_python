@@ -29,19 +29,19 @@ def evaluate(source):
         return evaluate(source[1]) == []
     elif source[0] == 'cond':
         for statement in source[1:]:
-            print("statement: {}".format(statement))
+            #  print("statement: {}".format(statement))
             cond, expr = statement[0], statement[1]
             if cond == "else" or evaluate(cond):
                 return evaluate(expr)
         raise SyntaxError( "Invalid syntax of 'cond'")
     elif source[0] == 'lambda':
         def gen_body_of_lamda(exps, vargs, args):
-            print("varg: {}, arg: {}".format(vargs, args))
+            #  print("varg: {}, arg: {}".format(vargs, args))
             for varg, arg in zip(vargs, args):
                 dispatch_table[varg] = arg
             for exp in exps:
                 result = evaluate(exp)
-            print(result)
+            #  print(result)
             return result
 
         vargs, expr = source[1], source[2:]
@@ -62,7 +62,8 @@ def evaluate(source):
 def main():
     while True:
         source_list = Reader.read()
-        print(source_list)
+        print("---------")
+        #  print(source_list)
 
         try:
             result = evaluate(source_list)
