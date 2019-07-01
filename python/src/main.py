@@ -53,6 +53,8 @@ def evaluate(source):
         with open(file_path) as f:
             module_content = f.read()
             return evaluate(Reader.parse(module_content))
+    elif source[0] == 'equals':
+        return evaluate(source[1]) == evaluate(source[2])
     else:
         operator = dispatch_table[source[0]]
         args = [evaluate(expr) for expr in source[1:]]
