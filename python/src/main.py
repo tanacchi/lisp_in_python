@@ -10,7 +10,7 @@ def main():
     })
 
     while True:
-        print(global_env)
+        #  print(global_env)
         source_list = Reader.read()
         for target in source_list:
             print("---------")
