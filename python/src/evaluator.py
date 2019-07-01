@@ -18,8 +18,6 @@ def evaluate(source, env):
         return evaluate(evaluate(source[1], env)[0], env)
     elif source[0] == 'cdr':
         return evaluate(source[1], env)[1:]
-    elif source[0] == 'is_null':
-        return evaluate(source[1], env) == []
     elif source[0] == 'cond':
         for statement in source[1:]:
             #  print("statement: {}".format(statement))
@@ -38,8 +36,6 @@ def evaluate(source, env):
 
         vargs, expr = source[1], source[2:]
         return lambda args: gen_body_of_lamda(expr, vargs, args)
-    elif source[0] == 'is_zero':
-        return evaluate(source[1], env) == 0
     elif source[0] == 'load':
         match = re.search(re.compile(r'(?<=\").*(?=\")'), source[1])
         file_path = match.group(0)
@@ -47,7 +43,7 @@ def evaluate(source, env):
         with open(file_path) as f:
             module_content = f.read()
             return evaluate(Reader.parse(module_content), env)
-    elif source[0] == 'equals':
+    elif source[0] == 'eq?':
         return evaluate(source[1], env) == evaluate(source[2], env)
     else:
         operator = env.find(source[0])[source[0]]
