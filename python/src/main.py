@@ -6,7 +6,8 @@ from evaluator import evaluate
 def main():
     global_env = Env()
     global_env.update({ 
-        'add': lambda args : args[0] + args[1],
+        'add1': lambda args : args[0] + 1,
+        'sub1': lambda args : args[0] - 1
     })
 
     while True:
