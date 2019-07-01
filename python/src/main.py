@@ -1,4 +1,3 @@
-import re
 from reader import Reader
 from env import Env
 from evaluator import evaluate
@@ -13,15 +12,16 @@ def main():
     while True:
         print(global_env)
         source_list = Reader.read()
-        print("---------")
-        print(source_list)
+        for target in source_list:
+            print("---------")
+            print(target)
 
-        try:
-            result = evaluate(source_list, global_env)
-            print("result: {}\n".format(result))
-        except Exception as e:
-            print("ERR: ")
-            print(e)
+            try:
+                result = evaluate(target, global_env)
+                print("result: {}\n".format(result))
+            except Exception as e:
+                print("ERR: ")
+                print(e)
 
 
 if __name__ == '__main__':

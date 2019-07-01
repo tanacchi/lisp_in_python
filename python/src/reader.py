@@ -28,8 +28,14 @@ class Reader(object):
 
     @staticmethod
     def parse(src):
-        result = Reader.__make_list(src, 0)
-        return result['list'][0]  # TODO: refactor
+        parse_result= []
+        index = 0
+        while src[index:]:
+            buff = Reader.__make_list(src[index:], 0)
+            parse_result.append(buff['list'])
+            index = buff['index']
+        print("parse_result: {}".format(parse_result[0]))
+        return parse_result[0]  # TODO: refactor
 
     @staticmethod
     def read():
