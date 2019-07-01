@@ -8,6 +8,7 @@ def evaluate(source, env):
     elif source[0] == 'define':
         key, value = source[1], evaluate(source[2], env)
         env[key] = value
+        return "'{}' => {}".format(key, value)
     elif source[0] == 'quote':
         return source[1]
     elif source[0] == 'cons':
