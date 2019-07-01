@@ -1,3 +1,5 @@
+from env import Env
+
 def evaluate(source, env):
     if isinstance(source, str):
         return env.find(source)[source]
