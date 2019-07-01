@@ -1,3 +1,4 @@
+import re
 from reader import Reader
 
 dispatch_table = {}
@@ -36,12 +37,12 @@ def evaluate(source):
         raise SyntaxError( "Invalid syntax of 'cond'")
     elif source[0] == 'lambda':
         def gen_body_of_lamda(exps, vargs, args):
-            #  print("varg: {}, arg: {}".format(vargs, args))
+            print("varg: {}, arg: {}".format(vargs, args))
             for varg, arg in zip(vargs, args):
                 dispatch_table[varg] = arg
             for exp in exps:
                 result = evaluate(exp)
-            #  print(result)
+            print(result)
             return result
 
         vargs, expr = source[1], source[2:]
@@ -49,7 +50,9 @@ def evaluate(source):
     elif source[0] == 'is_zero':
         return evaluate(source[1]) == 0
     elif source[0] == 'load':
-        file_path= source[1]
+        match = re.search(re.compile(r'(?<=\").*(?=\")'), source[1])
+        file_path = match.group(0)
+        print("file_path: {}".format(file_path))
         with open(file_path) as f:
             module_content = f.read()
             return evaluate(Reader.parse(module_content))
@@ -63,6 +66,7 @@ def evaluate(source):
 
 def main():
     while True:
+        print(dispatch_table)
         source_list = Reader.read()
         print("---------")
         print(source_list)
