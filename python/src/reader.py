@@ -11,7 +11,7 @@ class Reader(object):
     def __make_list(src, index):
         result = []
         while src[index:]:
-            match = re.search(re.compile(r'^[^ ()]+'), src[index:])
+            match = re.search(re.compile(r'^[^ ()\n]+'), src[index:])
             if match != None:
                 detected_token = match.group(0)
                 index += len(detected_token)
