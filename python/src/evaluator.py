@@ -43,9 +43,8 @@ def evaluate(source, env):
         file_path = match.group(0)
         with open(file_path) as f:
             module_contents = Reader.parse(f.read())
-            result = None
             for target in module_contents:
-                result = evaluate(target, env)
+                print(evaluate(target, env))
     elif source[0] == 'eq?':
         return evaluate(source[1], env) == evaluate(source[2], env)
     else:
