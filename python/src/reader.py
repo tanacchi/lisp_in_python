@@ -34,7 +34,6 @@ class Reader(object):
             buff = Reader.__make_list(src[index:], 0)
             parse_result.append(buff['list'])
             index = buff['index']
-        print("parse_result: {}".format(parse_result[0]))
         return parse_result[0]  # TODO: refactor
 
     @staticmethod

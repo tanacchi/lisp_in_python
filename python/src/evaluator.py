@@ -25,18 +25,15 @@ def evaluate(source, env):
         return evaluate(source[1], env)[1:]
     elif source[0] == 'cond':
         for statement in source[1:]:
-            #  print("statement: {}".format(statement))
             cond, expr = statement[0], statement[1]
             if cond == "else" or evaluate(cond, env):
                 return evaluate(expr, env)
         raise SyntaxError( "Invalid syntax of 'cond'")
     elif source[0] == 'lambda':
         def gen_body_of_lamda(exps, vargs, args):
-            print("varg: {}, arg: {}".format(vargs, args))
             inner_env = Env(vargs, args, env)
             for exp in exps:
                 result = evaluate(exp, inner_env)
-            print(result)
             return result
 
         vargs, expr = source[1], source[2:]
@@ -44,10 +41,11 @@ def evaluate(source, env):
     elif source[0] == 'load':
         match = re.search(re.compile(r'(?<=\").*(?=\")'), source[1])
         file_path = match.group(0)
-        print("file_path: {}".format(file_path))
         with open(file_path) as f:
-            module_content = f.read()
-            return evaluate(Reader.parse(module_content), env)
+            module_contents = Reader.parse(f.read())
+            result = None
+            for target in module_contents:
+                result = evaluate(target, env)
     elif source[0] == 'eq?':
         return evaluate(source[1], env) == evaluate(source[2], env)
     else:
