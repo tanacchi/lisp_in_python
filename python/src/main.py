@@ -65,7 +65,7 @@ def main():
     while True:
         source_list = Reader.read()
         print("---------")
-        #  print(source_list)
+        print(source_list)
 
         try:
             result = evaluate(source_list)

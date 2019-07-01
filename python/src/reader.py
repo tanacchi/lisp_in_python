@@ -1,6 +1,6 @@
 import re
 
-class Reader(object):  # TODO: Get more accuracy
+class Reader(object):
     @staticmethod
     def __tokenize(target):
         try: return int(target)
@@ -11,7 +11,7 @@ class Reader(object):  # TODO: Get more accuracy
     def __make_list(src, index):
         result = []
         while src[index:]:
-            match = re.search(re.compile(r'^[\w\d]+'), src[index:])
+            match = re.search(re.compile(r'^[^ ()]+'), src[index:])
             if match != None:
                 detected_token = match.group(0)
                 index += len(detected_token)
@@ -28,8 +28,8 @@ class Reader(object):  # TODO: Get more accuracy
 
     @staticmethod
     def parse(src):
-        result = Reader.__make_list(src, src.find("(") + 1)
-        return result['list']
+        result = Reader.__make_list(src, 0)
+        return result['list'][0]  # TODO: refactor
 
     @staticmethod
     def read():
