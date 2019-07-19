@@ -1,6 +1,6 @@
 import re
-from src.env import Env
-from src.reader import Reader
+from env import Env
+from reader import Reader
 
 def evaluate(source, env):
     if isinstance(source, str):
